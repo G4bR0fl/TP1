@@ -105,8 +105,10 @@ void Telefone::verify(char tel[14]) throw (invalid_argument){
     }
 }
 
+//Funções para a classe Endereço
+
 Endereco::Endereco(char add[21]){
-    setEndereco(add);
+    setEndereco(add);//Inicializando o objeto numa string auxiliar
 }
 
 char* Endereco::getEndereco(){
@@ -127,5 +129,50 @@ void Endereco::verify(char add[21]) throw (invalid_argument){
             throw invalid_argument ("Endereco invalido");
         }
     }
-
 }
+
+//Funções para a classe Data
+
+Data::Data(char date[11]){
+    setData(date);//Inicializando o objeto numa string auxiliar
+}
+
+char* Data::getData(){
+    return data;
+}
+
+void Data::setData(char date[11]) throw (invalid_argument){
+    verify(date);
+    strcpy(data, date);
+}
+
+void Data::verify(char date[11]) throw (invalid_argument){
+    //DD/MM/AAAA
+    if(!isdigit(date[0]) || !isdigit(date[1])){
+        throw invalid_argument ("Data invalida");
+    }
+    if(date[2] != '/' || date[5] != '/'){
+        throw invalid_argument ("Data invalida");
+    }
+    if(!isdigit(date[3]) || !isdigit(date[4])){
+        throw invalid_argument ("Data invalida");
+    }
+    if(!isdigit(date[6]) || !isdigit(date[7]) || !isdigit(date[8]) || !isdigit(date[9])){
+        throw invalid_argument ("Data invalida");
+    }
+    dia = (date[0] + date[1]) - (48*2);//0 e 1
+    mes = (date[3] + date[4]) - (48*2);// 3 e 4
+    for(unsigned int i = 6; i < 10; i++){
+
+    }                                  ;//6, 7, 8, 9
+    if(dia > MAX_DIA || dia < MIN_DIA){
+        throw invalid_argument ("Dia invalido");
+    }
+    if(mes > MAX_MES || mes < MIN_MES){
+        throw invalid_argument ("Mes invalido");
+    }
+    if(ano > MAX_ANO || ano < MIN_ANO){
+        throw invalid_argument ("Ano invalido");
+    }
+}
+

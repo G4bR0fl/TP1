@@ -52,7 +52,6 @@ private:
 
 class Endereco{
 
-
 public:
     void setEndereco(char add[21]) throw (invalid_argument);
     char* getEndereco();
@@ -66,5 +65,21 @@ private:
 
 };
 
+
+class Data{
+
+public:
+    void setData(char date[11]) throw (invalid_argument);
+    char* getData();
+
+    Data(char date[11]);
+    ~Data(){};
+
+private:
+    void verify(char date[11]) throw (invalid_argument);
+    char data[11];
+    int dia = 0, mes = 0, ano = 0, ano_array[4];
+    const int MAX_DIA = 31, MAX_MES = 12, MAX_ANO = 2099, MIN_ANO = 1900, MIN_MES = 1, MIN_DIA = 1;
+};
 
 #endif
