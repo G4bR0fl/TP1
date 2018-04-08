@@ -37,32 +37,71 @@ void Nome::verify(char str[21]) throw(invalid_argument){
 
 
 
+Sobrenome::Sobrenome(char str[21]){
+    setSobrenome(str);//Inicializando o objeto numa string auxiliar
+}
+
+void Sobrenome::setSobrenome(char str[21]) throw(invalid_argument){
+    verify(str);
+    strcpy(last_name, str);
+}
+
+char* Sobrenome::getSobrenome(){
+    return last_name;
+}
 
 
-
-
-
-
-
-/*
-void Sobrenome::verify(char last_name[]) throw(invalid_argument){
-    if(islower(last_name[0])){
-
+void Sobrenome::verify(char str[21]) throw(invalid_argument){
+    if(islower(str[0])){
         throw invalid_argument ("Nao comeca com letra maiuscula");
     }
-    for(unsigned int i = 0; i < strlen(last_name); i++){
-        if(last_name[i] == '\0'){
+    for(unsigned int i = 0; i < strlen(str); i++){
+        if(str[i] == '\0'){
             break;
         }
         else{
-            if(!isalpha(last_name[i])){
+            if(!isalpha(str[i])){
                 throw invalid_argument ("Nao pertence ao alfabeto.");
             }
         }
     }
-}*/
+}
 
+//Funções para a classe 'Telefone'
 
+Telefone::Telefone(char tel[14]){
+    setTelefone(tel);//Inicializando o objeto numa string auxiliar
+}
 
+char* Telefone::getTelefone(){
+    return numero;
+}
 
+void Telefone::setTelefone(char tel[14]) throw (invalid_argument){
+    verify(tel);
+    strcpy(numero, tel);
+
+}
+
+void Telefone::verify(char tel[14]) throw (invalid_argument){
+    for(unsigned int i = 0; i < strlen(tel); i++){
+        if(i == 2){
+            if(!isspace(tel[i])){
+                throw invalid_argument ("Telefone invalido");
+            }
+        }
+        else{
+            if(i == 8){
+                if(tel[i] != '-'){
+                    throw invalid_argument ("Telefone invalido");
+                }
+            }
+            else{
+                if(!isdigit(tel[i])){
+                    throw invalid_argument ("Telefone invalido");
+                }
+            }
+        }
+    }
+}
 

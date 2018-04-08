@@ -28,7 +28,6 @@ class Sobrenome{
 public:
 
     void setSobrenome(char str[21]) throw(invalid_argument);
-
     char* getSobrenome();
 
     Sobrenome(char str[21]);
@@ -36,8 +35,19 @@ public:
 private:
     char last_name[21];
     void verify(char str[21]) throw (invalid_argument);
-
 };
 
+class Telefone{
+
+public:
+    void setTelefone(char tel[14]) throw (invalid_argument);
+    char* getTelefone();
+
+    Telefone(char tel[14]);
+    ~Telefone(){};
+private:
+    void verify(char tel[14]) throw (invalid_argument);
+    char numero[14];
+};
 
 #endif
