@@ -105,3 +105,27 @@ void Telefone::verify(char tel[14]) throw (invalid_argument){
     }
 }
 
+Endereco::Endereco(char add[21]){
+    setEndereco(add);
+}
+
+char* Endereco::getEndereco(){
+    return endereco;
+}
+
+void Endereco::setEndereco(char add[21]) throw (invalid_argument){
+    verify(add);
+    strcpy(endereco, add);
+}
+
+void Endereco::verify(char add[21]) throw (invalid_argument){
+    if(isspace(add[0]) || isspace(add[strlen(add)-1])){
+        throw invalid_argument ("Endereco invalido");
+    }
+    for(unsigned int i = 0; i < strlen(add); i++){
+        if(isspace(add[i]) && isspace(add[i+1])){
+            throw invalid_argument ("Endereco invalido");
+        }
+    }
+
+}

@@ -50,4 +50,21 @@ private:
     char numero[14];
 };
 
+class Endereco{
+
+
+public:
+    void setEndereco(char add[21]) throw (invalid_argument);
+    char* getEndereco();
+
+    Endereco(char add[21]);
+    ~Endereco(){};
+
+private:
+    void verify(char add[21]) throw (invalid_argument);
+    char endereco[21];
+
+};
+
+
 #endif
