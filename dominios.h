@@ -13,28 +13,31 @@ using namespace std;
 class Nome{
 
 public:
-    Nome();
+    char* getNome();
+    void setNome(char str[21]) throw(invalid_argument);
+
+     Nome(char str[21]);
     ~Nome(){};
-
-    Nome(char name[]){
-        setNome(name);
-    };
-
-    char* getNome(){
-        return name;
-    };
-
-
-    void setNome(char str[]) throw(invalid_argument){
-        cout << "Digite seu nome:" << endl;
-        scanf("%[^\n]s",name);
-        verify(name);
-        strcpy(name, str);
-    };
-
 private:
     char name[21];
-    void verify(char name[]) throw (invalid_argument);
+    void verify(char str[21]) throw (invalid_argument);
 };
+
+class Sobrenome{
+
+public:
+
+    void setSobrenome(char str[21]) throw(invalid_argument);
+
+    char* getSobrenome();
+
+    Sobrenome(char str[21]);
+    ~Sobrenome(){};
+private:
+    char last_name[21];
+    void verify(char str[21]) throw (invalid_argument);
+
+};
+
 
 #endif
