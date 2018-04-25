@@ -1,178 +1,349 @@
+#include <stdlib.h>
 #include "dominios.h"
+
 
 using namespace std;
 
-//Fynções para a classe "Nome"
+void Nome::validar(string nome) throw (invalid_argument){
 
-Nome::Nome(char str[21]){
-    setNome(str);//Inicializando o objeto numa string auxiliar
-}
+	int tNome = nome.size(), contador = 0;
+	char letra;
 
-void Nome::setNome(char str[21]) throw(invalid_argument){
-    verify(str);
-    strcpy(name, str);
-}
+	if(tNome > TamanhoMaxNome){
+		throw invalid_argument("Argumento invalido.");
+	}
 
-char* Nome::getNome(){
-    return name;
-}
+    letra = nome[contador];
+    if(islower(letra)  || isdigit(letra)){
+        throw invalid_argument("Deve comocar com letra maiuscula");
+    }else{
+        contador++;
+        while(contador != tNome){
 
-void Nome::verify(char str[21]) throw(invalid_argument){
-    if(islower(str[0])){
-        throw invalid_argument ("Nao comeca com letra maiuscula");
-    }
-    for(unsigned int i = 0; i < strlen(str); i++){
-        if(str[i] == '\0'){
-            break;
-        }
-        else{
-            if(!isalpha(str[i])){
-                throw invalid_argument ("Nao pertence ao alfabeto.");
+            letra = nome[contador];
+
+            if(isdigit(letra) || isspace(letra) || !isalpha(letra) || ispunct(letra)){
+                throw invalid_argument("Argumento invalido! Nao faz parte do Alfabeto!");
             }
+            contador++;
         }
     }
 }
 
-//Fynções para a classe "Sobrenome"
-
-
-
-Sobrenome::Sobrenome(char str[21]){
-    setSobrenome(str);//Inicializando o objeto numa string auxiliar
+void Nome::setNome(string nome) throw (invalid_argument){
+    validar(nome);
+    this->nome = nome;
 }
 
-void Sobrenome::setSobrenome(char str[21]) throw(invalid_argument){
-    verify(str);
-    strcpy(last_name, str);
-}
+void Sobrenome::validar(string sobrenome) throw (invalid_argument){
 
-char* Sobrenome::getSobrenome(){
-    return last_name;
-}
+	int tSobrenome = sobrenome.size(), contador = 0;
+	char letra;
 
+	if(tSobrenome > TamanhoMaxSobrenome){
+		throw invalid_argument("Argumento invalido.");
+	}
 
-void Sobrenome::verify(char str[21]) throw(invalid_argument){
-    if(islower(str[0])){
-        throw invalid_argument ("Nao comeca com letra maiuscula");
-    }
-    for(unsigned int i = 0; i < strlen(str); i++){
-        if(str[i] == '\0'){
-            break;
-        }
-        else{
-            if(!isalpha(str[i])){
-                throw invalid_argument ("Nao pertence ao alfabeto.");
+    letra = sobrenome[contador];
+    if(islower(letra) || isdigit(letra)){
+        throw invalid_argument("Deve comocar com letra maiuscula");
+    }else{
+        contador++;
+        while(contador != tSobrenome){
+
+            letra = sobrenome[contador];
+
+            if(isdigit(letra) || isspace(letra) || !isalpha(letra) || ispunct(letra)){
+                throw invalid_argument("Argumento invalido! Nao faz parte do Alfabeto!");
             }
+            contador++;
         }
     }
 }
 
-//Funções para a classe 'Telefone'
-
-Telefone::Telefone(char tel[14]){
-    setTelefone(tel);//Inicializando o objeto numa string auxiliar
+void Sobrenome::setSobrenome(string sobrenome) throw (invalid_argument){
+    validar(sobrenome);
+    this->sobrenome = sobrenome;
 }
 
-char* Telefone::getTelefone(){
-    return numero;
-}
+void Telefone::validar(string telefone) throw (invalid_argument){
+    int tTelefone = telefone.size(), contador = 0;
+	char letra;
 
-void Telefone::setTelefone(char tel[14]) throw (invalid_argument){
-    verify(tel);
-    strcpy(numero, tel);
+	if(tTelefone > TamanhoTelefone){
+		throw invalid_argument("Argumento invalido.");
+	}
 
-}
+    letra = telefone[contador];
+    if(!isdigit(letra)){
+        throw invalid_argument("Deve ser numero");
+    }
+    else if((!isspace(telefone[2])) || (telefone[8] != '-')){
+        throw invalid_argument("Formato invalido.");
+    }else{
+        while(contador != tTelefone){
+            letra = telefone[contador];
 
-void Telefone::verify(char tel[14]) throw (invalid_argument){
-    for(unsigned int i = 0; i < strlen(tel); i++){
-        if(i == 2){
-            if(!isspace(tel[i])){
+            if(contador == 2){
+            if(!isspace(letra)){
                 throw invalid_argument ("Telefone invalido");
             }
         }
         else{
-            if(i == 8){
-                if(tel[i] != '-'){
+            if(contador == 8){
+                if(letra != '-'){
                     throw invalid_argument ("Telefone invalido");
                 }
             }
             else{
-                if(!isdigit(tel[i])){
+                if(!isdigit(letra)){
                     throw invalid_argument ("Telefone invalido");
                 }
             }
         }
-    }
-}
-
-//Funções para a classe Endereço
-
-Endereco::Endereco(char add[21]){
-    setEndereco(add);//Inicializando o objeto numa string auxiliar
-}
-
-char* Endereco::getEndereco(){
-    return endereco;
-}
-
-void Endereco::setEndereco(char add[21]) throw (invalid_argument){
-    verify(add);
-    strcpy(endereco, add);
-}
-
-void Endereco::verify(char add[21]) throw (invalid_argument){
-    if(isspace(add[0]) || isspace(add[strlen(add)-1])){
-        throw invalid_argument ("Endereco invalido");
-    }
-    for(unsigned int i = 0; i < strlen(add); i++){
-        if(isspace(add[i]) && isspace(add[i+1])){
-            throw invalid_argument ("Endereco invalido");
+        contador++;
         }
     }
 }
 
-//Funções para a classe Data
-
-Data::Data(char date[11]){
-    setData(date);//Inicializando o objeto numa string auxiliar
+void Telefone::setTelefone(string telefone) throw (invalid_argument){
+    validar(telefone);
+    this->telefone = telefone;
 }
 
-char* Data::getData(){
-    return data;
-}
+void Endereco::validar(string endereco) throw (invalid_argument){
 
-void Data::setData(char date[11]) throw (invalid_argument){
-    verify(date);
-    strcpy(data, date);
-}
+	int tEndereco = endereco.size(), contador = 0;
+	char letra;
 
-void Data::verify(char date[11]) throw (invalid_argument){
-    //DD/MM/AAAA
-    if(!isdigit(date[0]) || !isdigit(date[1])){
-        throw invalid_argument ("Data invalida");
-    }
-    if(date[2] != '/' || date[5] != '/'){
-        throw invalid_argument ("Data invalida");
-    }
-    if(!isdigit(date[3]) || !isdigit(date[4])){
-        throw invalid_argument ("Data invalida");
-    }
-    if(!isdigit(date[6]) || !isdigit(date[7]) || !isdigit(date[8]) || !isdigit(date[9])){
-        throw invalid_argument ("Data invalida");
-    }
-    dia = (date[0] + date[1]) - (48*2);//0 e 1
-    mes = (date[3] + date[4]) - (48*2);// 3 e 4
-    for(unsigned int i = 6; i < 10; i++){
+	if(tEndereco > TamanhoMaxEndereco){
+		throw invalid_argument("Argumento invalido.");
+	}
 
-    }                                  ;//6, 7, 8, 9
-    if(dia > MAX_DIA || dia < MIN_DIA){
-        throw invalid_argument ("Dia invalido");
-    }
-    if(mes > MAX_MES || mes < MIN_MES){
-        throw invalid_argument ("Mes invalido");
-    }
-    if(ano > MAX_ANO || ano < MIN_ANO){
-        throw invalid_argument ("Ano invalido");
+    letra = endereco[contador];
+    if(isspace(letra) || isspace(endereco[tEndereco-1])){
+        throw invalid_argument("Espacos no inicio e/ou final");
+    }else{
+        contador++;
+        while(contador != tEndereco){
+
+            letra = endereco[contador];
+
+            if(isspace(letra) && isspace(endereco[contador+1])){
+                throw invalid_argument("Dois espacos em sequecia");
+            }
+            else if(isdigit(letra) || ispunct(letra)){
+                throw invalid_argument("Argumento invalido! Nao faz parte do Alfabeto!");
+            }
+            contador++;
+        }
     }
 }
 
+void Endereco::setEndereco(string endereco) throw (invalid_argument){
+    validar(endereco);
+    this->endereco = endereco;
+}
+
+void Data::validar(string data) throw (invalid_argument){
+    int tData = data.size(), contador = 0;
+    char letra;
+
+    if(tData > TamanhoData){
+		throw invalid_argument("Argumento invalido.");
+	}
+
+    if(data[2] != '/' || data[5] != '/'){
+        throw invalid_argument("Argumento invalido.");
+    }
+
+	int dia = ((data[0] - '0')*(10))+(data[1] - '0');
+	int mes = ((data[3] - '0')*(10))+(data[4] - '0');
+	int ano = ((data[6] - '0')*(1000))+((data[7] - '0')*(100))+((data[8] - '0')*(10))+(data[9] - '0');
+
+    if(dia > 31 || dia < 0){
+        throw invalid_argument("dia menor que 1 ou maior que 31.");
+    }
+    if(mes < 1 || mes > 12){
+        throw invalid_argument("Mes maior que 12 ou menor que 1.");
+    }
+    if(ano < 1900 || ano > 2099){
+        throw invalid_argument("Ano menor que 1900 ou maior 2099.");
+    }else{
+        while(contador != tData){
+
+            letra = data[contador];
+
+            if(isalpha(letra)){
+                throw invalid_argument("Data Invalida");
+            }
+            contador++;
+        }
+    }
+}
+
+void Data::setData(string data) throw (invalid_argument){
+    validar(data);
+    this->data = data;
+}
+
+void Email::validar(string email) throw (invalid_argument){
+    int tEmail = email.size(), contador = 0, cont2 = 0;
+	char letra;
+
+    letra = email[contador];
+    if(isspace(letra) || isspace(email[tEmail-1]) || email[contador] == '-' || email[tEmail-1] == '-' || email[contador] == '.' || email[tEmail-1] == '.'){
+        throw invalid_argument("Espacos no inicio e/ou final");
+    }else{
+        while(email[contador] != '@'){
+            letra = email[contador];
+            if(isspace(letra)){
+                throw invalid_argument("Argumento invalido! Nao faz parte do Alfabeto!");
+            }
+            contador++;
+            cont2++;
+        }
+        cont2++;
+        int cont3 = 0, cont4 = 0;
+        while(cont2 != tEmail){
+            letra = email[cont2];
+            if(isspace(letra) || letra == ','){
+                throw invalid_argument("Argumento invalido! Nao faz parte do Alfabeto!");
+            }
+            if(isdigit(letra) || letra == '.'){
+                cont4++;
+            }
+            cont2++;
+            cont3++;
+        }
+        if(cont3==cont4){
+            throw invalid_argument("Dominio so de numeros!");
+        }
+    }
+}
+
+void Email::setEmail(string email) throw (invalid_argument){
+    validar(email);
+    this->email = email;
+}
+
+void Senha::validar(string senha) throw (invalid_argument){
+    int tSenha = senha.size(), contador = 0, d=0, u=0, l=0;
+	char letra;
+
+	if(tSenha > TamanhoSenha){
+		throw invalid_argument("Argumento invalido.");
+	}
+
+	while(contador != tSenha){
+
+        letra = senha[contador];
+
+        if(ispunct(letra)){
+            throw invalid_argument("tem pontuacao na senha");
+        }
+
+        if(isdigit(letra)){
+            d = 1;
+        }
+        if(isupper(letra)){
+            u = 1;
+        }
+        if(islower(letra)){
+            l = 1;
+        }
+        contador++;
+	}
+
+	if(u == 0 || l == 0 || d == 0){
+        throw invalid_argument("Nao atende requisitos");
+	}
+}
+
+void Senha::setSenha(string senha) throw (invalid_argument){
+    validar(senha);
+    this->senha = senha;
+}
+
+void Texto::validar(string texto) throw (invalid_argument){
+    int tTexto = texto.size();
+
+	if(tTexto > TamanhoMaxTexto){
+		throw invalid_argument("Texto invalido.");
+	}
+	if(tTexto <= 0){
+        throw invalid_argument("Texto invalido.");
+	}
+}
+
+void Texto::setTexto(string texto) throw (invalid_argument){
+    validar(texto);
+    this->texto = texto;
+}
+
+void Idioma::validar(string idioma) throw (invalid_argument){
+    int tIdioma = idioma.size();
+
+    if(tIdioma > TamanhoIdioma){
+        throw invalid_argument("Argumento Invalido.");
+    }
+
+    if((idioma=="ESP")){
+		return;
+	}
+	else{
+		if((idioma=="FRA")){
+			return;
+		}
+		else{
+			if((idioma=="GER")){
+				return;
+			}
+			else{
+				if((idioma=="ITA")){
+					return;
+				}
+				else{
+					if((idioma=="POR")){
+						return;
+					}
+					else{
+                        if((idioma=="SPA")){
+                            return;
+                        }
+                    }
+				}
+			}
+		}
+	}
+	throw invalid_argument("Idioma invalido");
+}
+
+void Idioma::setIdioma(string idioma) throw (invalid_argument){
+    validar(idioma);
+    this->idioma = idioma;
+}
+
+void ClasseTermo::validar(string ctermo) throw (invalid_argument){
+    int tCtermo = ctermo.size();
+
+    if(tCtermo > TamanhoCTermo){
+        throw invalid_argument("Argumento Invalido.");
+    }
+
+    if((ctermo=="NP")){
+		return;
+	}
+	else{
+		if((ctermo=="PT")){
+			return;
+		}
+	}
+	throw invalid_argument("Idioma invalido");
+
+}
+
+void ClasseTermo::setClasseTermo(string ctermo) throw (invalid_argument){
+    validar(ctermo);
+    this->ctermo = ctermo;
+}
