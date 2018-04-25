@@ -11,75 +11,173 @@
 using namespace std;
 
 class Nome{
+private:
+
+    string nome;
+    const static int TamanhoMaxNome=20;
+
+    void validar (string) throw (invalid_argument);
 
 public:
-    char* getNome();
-    void setNome(char str[21]) throw(invalid_argument);
 
-     Nome(char str[21]);
-    ~Nome(){};
-private:
-    char name[21];
-    void verify(char str[21]) throw (invalid_argument);
+    void setNome(string) throw (invalid_argument);
+
+    string getNome(){
+        return nome;
+    }
 };
 
 class Sobrenome{
+private:
+
+    string sobrenome;
+    const static int TamanhoMaxSobrenome=20;
+
+    void validar (string) throw (invalid_argument);
 
 public:
 
-    void setSobrenome(char str[21]) throw(invalid_argument);
-    char* getSobrenome();
+    void setSobrenome(string) throw (invalid_argument);
 
-    Sobrenome(char str[21]);
-    ~Sobrenome(){};
-private:
-    char last_name[21];
-    void verify(char str[21]) throw (invalid_argument);
+    string getSobrenome(){
+        return sobrenome;
+    }
 };
 
 class Telefone{
+private:
+
+    string telefone;
+    const static int TamanhoTelefone=13;
+
+    void validar(string) throw (invalid_argument);
 
 public:
-    void setTelefone(char tel[14]) throw (invalid_argument);
-    char* getTelefone();
 
-    Telefone(char tel[14]);
-    ~Telefone(){};
-private:
-    void verify(char tel[14]) throw (invalid_argument);
-    char numero[14];
+    void setTelefone(string) throw (invalid_argument);
+
+    string getTelefone(){
+        return telefone;
+    }
 };
 
 class Endereco{
+private:
+
+    string endereco;
+    const static int TamanhoMaxEndereco = 20;
+
+    void validar(string) throw (invalid_argument);
 
 public:
-    void setEndereco(char add[21]) throw (invalid_argument);
-    char* getEndereco();
 
-    Endereco(char add[21]);
-    ~Endereco(){};
+    void setEndereco(string) throw (invalid_argument);
 
-private:
-    void verify(char add[21]) throw (invalid_argument);
-    char endereco[21];
-
+    string getEndereco(){
+        return endereco;
+    }
 };
 
-
 class Data{
+private:
+
+    string data;
+
+    const static int TamanhoData=10; /** Valor constate, armazena o numero maximo de caracteres que podem estar na string*/
+
+    void validar(string) throw (invalid_argument);
 
 public:
-    void setData(char date[11]) throw (invalid_argument);
-    char* getData();
 
-    Data(char date[11]);
-    ~Data(){};
+    void setData(string) throw (invalid_argument);
 
+    string getData(){
+        return data;
+    }
+};
+
+class Email{
 private:
-    void verify(char date[11]) throw (invalid_argument);
-    char data[11];
-    int dia = 0, mes = 0, ano = 0, ano_array[4];
-    const int MAX_DIA = 31, MAX_MES = 12, MAX_ANO = 2099, MIN_ANO = 1900, MIN_MES = 1, MIN_DIA = 1;
+
+    string email;
+
+    void validar(string) throw (invalid_argument);
+
+public:
+
+    void setEmail(string) throw (invalid_argument);
+
+    string getEmail(){
+        return email;
+    }
+};
+
+class Senha{
+private:
+
+    string senha;
+    const static int TamanhoSenha = 8;
+
+    void validar(string) throw (invalid_argument);
+
+public:
+
+    void setSenha(string) throw (invalid_argument);
+
+    string getSenha(){
+        return senha;
+    }
+};
+
+class Texto{
+private:
+
+    string texto;
+    const static int TamanhoMaxTexto = 30;
+
+    void validar(string) throw (invalid_argument);
+
+public:
+
+    void setTexto(string) throw (invalid_argument);
+
+    string getTexto(){
+        return texto;
+    }
+};
+
+class Idioma{
+private:
+
+    string idioma;
+    const static int TamanhoIdioma = 3;
+
+    void validar(string) throw (invalid_argument);
+
+public:
+
+    void setIdioma(string) throw (invalid_argument);
+
+    string getIdioma(){
+        return idioma;
+    }
+};
+
+class ClasseTermo{
+private:
+
+    string ctermo;
+    const static int TamanhoCTermo = 2;
+
+    void validar(string) throw (invalid_argument);
+
+public:
+
+    void setClasseTermo(string) throw (invalid_argument);
+
+    string getClasseTermo(){
+        return ctermo;
+    }
 };
 
 #endif
