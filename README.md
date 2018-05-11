@@ -1,4 +1,4 @@
 # Programming Techniques 1
-######Current assignemnts:
+Current assignments:
 
 [Trabalho1](Trabalho1/)
