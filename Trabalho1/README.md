@@ -1,6 +1,5 @@
-  # Programming Techniques 1
-
-##Assignments
+  # Programming Techniques 1  
+  ## Assignments
 
 1. Codificar as classes que representam os domínios. [x]
 2. Codificar as classes que representam as entidades. [x]
